@@ -5,7 +5,7 @@
 # Name of the executable created (.exe will be added automatically if necessary)
 Target := RTR
 # List of source files, separated by spaces
-Sources := Camera.cpp Light.cpp main.cpp Renderer.cpp Scene.cpp SPlane.cpp SSphere.cpp
+Sources := $(wildcard *.cpp)
 # Path for the executable. Note that Irrlicht.dll should usually also be there for win32 systems
 BinPath = ./bin
 
