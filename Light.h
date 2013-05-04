@@ -4,13 +4,13 @@
 #include <irrlicht.h>
 using namespace irr;
 using core::vector3df;
-using video::SColor;
+using video::SColorf;
 
 struct Light
 {
 	Light(const vector3df& position,
 		const vector3df& attenuation = vector3df(1,0,0),
-		const SColor& color = SColor(255,255,255,255)) :
+		const SColorf& color = SColorf(1.f,1.f,1.f,1.f)) :
 	Position(position), Attenuation(attenuation), Color(color)
 	{
 	}
@@ -19,7 +19,7 @@ struct Light
 
 	vector3df Position;
 	vector3df Attenuation;
-	SColor Color;
+	SColorf Color;
 };
 
 #endif

@@ -23,28 +23,36 @@ int main()
 	IVideoDriver* driver = device->getVideoDriver();
 
 	ITexture* rtt = driver->addTexture(dimension2d<u32>(W,H), "rtt");
-	Camera cam(vector3df(), vector3df(10,0,0));
+	Camera cam(vector3df(3, 6, 6), vector3df(0,0,0));
 	Renderer r(rtt, &cam);
 
-	//debug
-	vector3df inter;
-	ray ray;
-	ray.start.set(0,0,0);
-	ray.direction.set(1,0,0);
+	Material* basicMat = new Material(0.3f, 0.f,
+		SColor(255, 255,0,0));
+	Material* floorMat = new Material(0.8f, 0.f,
+		SColor(255, 200,200,200));
 
 	Scene scn;
-	SSphere* sphere1 = new SSphere(vector3df(5,0,0), 1);
-	scn.addShape(sphere1);
-	scn.addLight(new Light(vector3df(2,2,0)));
-	SSphere* sphere = new SSphere(vector3df(5,0,0), 2);
-	scn.addShape(sphere);
+	for (float i=0; i<1.5f*PI; i+=PI/8)
+	{
+		SSphere* sph = new SSphere(
+			vector3df(i*cos(i), i*sin(i), i*0.2f),
+			i*0.2f,
+			basicMat);
+		scn.addShape(sph);
+	}
+
+	scn.addShape(new SPlane(vector3df(0,0,-10),
+		vector3df(0,0,1),
+		floorMat));
+
+	scn.addLight(new Light(
+		vector3df(0,0,5),
+		vector3df(1,0.01f,0.01f),
+		SColorf(1.f,1.f,1.f)));
 
 	float phi = 0;
 	while (device->run())
 	{
-		phi += device->getTimer()->getSpeed() * 0.1f;
-		sphere->setCenter(vector3df(6, 3*cos(phi), sin(phi)));
-
 		r.renderScene(&scn);
 
 		driver->beginScene();

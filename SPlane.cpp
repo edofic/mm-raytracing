@@ -1,7 +1,7 @@
 #include "SPlane.h"
 
-SPlane::SPlane(const core::vector3df& orig, const core::vector3df& norm) :
-Origin(orig), Normal(norm)
+SPlane::SPlane(const core::vector3df& orig, const core::vector3df& norm, Material* mat) :
+Shape(mat), Origin(orig), Normal(norm)
 {
 	Normal = Normal.normalize();
 }

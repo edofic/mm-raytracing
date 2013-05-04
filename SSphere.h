@@ -6,7 +6,8 @@
 class SSphere : public Shape
 {
 public:
-	SSphere(const vector3df& c, float r) : Center(c), Radius(r) {}
+	SSphere(const vector3df& c, float r, Material* mat) :
+	  Shape(mat), Center(c), Radius(r) {}
 	~SSphere() {}
 
 	virtual bool getIntersection(const ray& ray, vector3df& result);

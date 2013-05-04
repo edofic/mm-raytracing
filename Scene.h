@@ -15,7 +15,7 @@ public:
 	~Scene() {}
 
 	Shape* getNearestIntersection(ray& ray, vector3df& inter);
-	SColor getDiffuse(const vector3df& point, const vector3df& normal);
+	SColor getDiffuse(const vector3df& point, const vector3df& normal, const Material* mat);
 
 	void addLight(Light* light)
 	{

@@ -6,7 +6,7 @@
 class SPlane : public Shape
 {
 public:
-	SPlane(const vector3df& orig, const vector3df& norm);
+	SPlane(const vector3df& orig, const vector3df& norm, Material* mat);
 	~SPlane() {}
 
 	virtual bool getIntersection(const ray& ray, vector3df& result);

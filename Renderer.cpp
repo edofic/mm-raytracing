@@ -51,8 +51,7 @@ SColor Renderer::raytrace(Scene* scn, ray& r, int depth)
 		SColor c(Background);
 		if (depth < MaxDepth)
 			c = raytrace(scn, reflected, depth+1);
-		return scn->getDiffuse(inter, norm).getInterpolated(c, 0.8f);
-		//return retcol;
+		return c.getInterpolated(scn->getDiffuse(inter, norm, shape->getMaterial()), shape->getMaterial()->getReflectivity());
 	}
 	else
 		return Background;
