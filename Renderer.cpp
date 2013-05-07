@@ -20,17 +20,21 @@ void Renderer::renderScene(Scene* scn)
 
 	r.direction = z;
 	int* data = (int*)Texture->lock();
-	for (u32 i=0; i<size.Width; i++)
-	{
-		for (u32 j=0; j<size.Height; j++)
-		{
-			r.direction = z +
-				((float)size.Width / 2 - i) * x +
-				((float)size.Height / 2 - j) * y;
-			col = raytrace(scn, r, 0);
-			data[i + j * size.Width] = col.color;
-		}
-	}
+  u32 i;
+  #pragma omp parallel for private(i) num_threads(10)
+  for (i=0; i<size.Width; i++)
+  {
+	  for (u32 j=0; j<size.Height; j++)
+	  {
+		  r.direction = z +
+			  ((float)size.Width / 2 - i) * x +
+			  ((float)size.Height / 2 - j) * y;
+		  col = raytrace(scn, r, 0);
+		  data[i + j * size.Width] = col.color;
+	  }
+  }
+  
+  #pragma omp barrier
 	Texture->unlock();
 }
 

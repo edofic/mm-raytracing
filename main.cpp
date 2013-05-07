@@ -1,4 +1,5 @@
 #include <irrlicht.h>
+#include <stdio.h>
 #pragma comment(lib, "irrlicht.lib")
 
 using namespace irr;
@@ -13,11 +14,12 @@ using namespace video;
 #include "Camera.h"
 #include "Renderer.h"
 
-#define W 200
-#define H 200
-
-int main()
+int main(int argc, char** argv)
 {
+  int W,H; 
+  sscanf(argv[1], "%d", &W);
+  sscanf(argv[2], "%d", &H);
+  
 	IrrlichtDevice* device = createDevice(EDT_OPENGL, dimension2d<u32>(W,H));
 	ISceneManager* smgr = device->getSceneManager();
 	IVideoDriver* driver = device->getVideoDriver();
